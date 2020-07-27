@@ -29,12 +29,17 @@ output <- function(outputfile) {
   abundindex <- core_abundance(physeq, detection, preval)
   members <- core_members(physeq, detection, preval)
   cover <- coverage(physeq, threshold = preval) 
+  pdf(paste(outputfile,"pdf",sep="."))
+  y <- plot_core(physeq, prevalences=seq(detection, 1, 0.1), min.prevalence=prevalence)
   #y <- plot_sparsity(p0)
   #print(str(y))
   #print(str(y$data))
   write.csv(members, paste(outputfile, "members", "csv", sep="."))
   write.csv(abundindex, paste(outputfile, "abundindex", "csv", sep="."))
   write.csv(cover, paste(outputfile, "coverage", "csv", sep="."))
+  print(y)#plot_bar(HMP, x="Description", fill=diffcol))
+  dev.off()
+
 }
 #input("plugins/Bar/example/parameters.txt")
 #run()
